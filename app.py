@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import os, datetime
 
 app = Flask(__name__)
@@ -8,7 +8,9 @@ time_changed = datetime.datetime.now()
 
 @app.route('/')
 def home():
-    return "The current temperature in F is: " + str(curr_temp) + " and was updated at: " + str(time_changed)
+ #   return "The current temperature in F is: " + str(curr_temp) + " and was updated at: " + str(time_changed)
+ return render_template("index.html")
+
 
 @app.route('/temp_data', methods=['GET', 'POST'])
 def temp_data():

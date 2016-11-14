@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<!--
+web page for Sentire bracelet app
+-->
+
+<html>
+    <head>
+	    <meta charset="UTF-8">  
+	    <title>Sentire</title>
+	    <link href="static/sentire.css" rel="stylesheet" type="text/CSS">
+	    
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">  google.charts.load('current', {'packages':['corechart','calendar']});</script>
+           	
+           <!-- <meta name="viewport" content="width=device­width, user­scalable=no" />
+
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-webapp-status-bar-style" content="black">
+
+
+            <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi"/> -->
+        
+    </head>
+
+    <body>
+			<!--our first page-->
+		       <div data-role="page" id="home" data-theme="a">
+            <div data-role="header"  data-position="inline">
+                <h1>Sentire</h1>
+            </div>
+                
+			<!-- /content -->
+
+			<div role="content" class="ui-content">
+				
+				<script>
+			     
+			      google.charts.setOnLoadCallback(drawLineChart);
+
+			      function drawLineChart() {
+			        var data = google.visualization.arrayToDataTable([
+			          ['Day', 'Mood', 'Diet'],
+			          ['Su',  08,      40],
+			          ['M',  50,      90],
+			          ['T',  50,      90],
+			          ['W',  60,       70],
+			          ['Th',  63,      60],
+			          ['F',  90,      70],
+			          ['Sa',  100,      30]
+			        ]);
+
+			        var options = {
+			          title: 'Mood and Diet',
+			          curveType: 'function',
+			          legend: { position: 'bottom' },
+			          colors:['#9999ff','#ffb366']
+			        };
+
+			        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+			        chart.draw(data, options);
+			      }
+			    </script>
+
+				 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+			</div>
+
+            <div data-role="footer">
+                
+                <div data-role="navbar" class = "navbar">
+                    <ul>
+                        <li> <a href="#home" id="current" data-icon="home">Home</a>
+                        <li> <a href="#calendar" id="navlink" data-icon="clock">Calendar</a>    
+                        <li> <a href="#goals" id="navlink" data-icon="bullets">My Goals</a>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
+        
+        <!-- ***********************Start of Calendar Page*********************** -->
+        <div data-role="page" id="calendar" data-theme="a">
+            <div data-role="header" data-position="inline">
+                <a data-icon="arrow-l" class="back" id="btnstyle" data-rel="back" back-btn="true">Back</a>
+                <h1>Your Calendar</h1>
+            </div>
+
+            <div role="content" class="ui-content">
+
+     //        <script>
+		   //   // google.charts.load("current", {packages:["calendar"]});
+		   //    google.charts.setOnLoadCallback(drawChart);
+
+		   // 	function drawChart() {
+		   //     var dataTable = new google.visualization.DataTable();
+		   //     dataTable.addColumn({ type: 'date', id: 'Date' });
+		   //     dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+
+		   //     //september cal
+		   //     for (i = 0; i < 31; i++) { 
+			  //      		var random_int = Math.floor(Math.random() * 9);
+
+					//     dataTable.addRows([[new Date(2016, 8, i+1), random_int]]);
+					// };
+
+			  //  //october cal
+		   //     for (i = 0; i < 31; i++) { 
+			  //      		var random_int = Math.floor(Math.random() * 9);
+
+					//     dataTable.addRows([[new Date(2016, 9, i+1), random_int]]);
+					// };
+
+			  //  //november cal
+		   //     for (i = 0; i < 30; i++) { 
+			  //      		var random_int = Math.floor(Math.random() * 9);
+
+					//     dataTable.addRows([[new Date(2016, 10, i+1), random_int]]);
+					// };
+
+
+		   //     var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+		   //     var options = {
+		   //       title: "Your Bracelet Use",
+		   //       height: 350,
+		   //     };
+
+		   //     chart.draw(dataTable, options);
+		  	//  }
+		   //  </script> 
+
+            <div id="calendar_basic" style="width: 1000px; height: 350px;"></div>
+
+            <br> <br> <br>
+            </div>
+            
+            <div data-role="footer">
+            <div data-role="navbar" class = "navbar">
+            	<ul>
+            		<li> <a href="#home" id="navlink" data-icon='home'>Home</a>
+            		 <li> <a href="#calendar"  id="current"  data-icon="clock">Calendar</a>         
+            		<li> <a href="#goals" id="navlink" data-icon="bullets">My Goals</a>
+            	</ul>
+            </div>
+            </div>
+        </div>
+
+    </body>
+
+
+
+
+</html>
