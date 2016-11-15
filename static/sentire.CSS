@@ -45,11 +45,14 @@ div.ui-header.ui-bar-inherit{
 	margin-top: 120px;
 }
 
-#curve_chart, #myChart {
+#curve_chart {
 	margin-left: auto;
 	margin-right: auto;
 }
 
+#myChart {
+	margin-right: 300px;
+}
 
 #checkstyle, #profbg{
 	background-color: white;
