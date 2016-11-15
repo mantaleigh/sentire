@@ -96,11 +96,6 @@ web page for Sentire bracelet app
             </div>
 
             <div role="content" class="ui-content">
-            	<h3> Calendar </h3> <!--placeholder calendar widget -->
-
-
-
-
 
             <script>
 		   //   // google.charts.load("current", {packages:["calendar"]});
@@ -153,7 +148,6 @@ web page for Sentire bracelet app
 
 			       		var newEntry = ["2016-10-" + i , Number(random_int),  "10/" + String(i) + "/16"];
 			       		calData.push(newEntry);
-			       		console.log(newEntry);
 					    
 					};
 				 // november cal
@@ -162,12 +156,7 @@ web page for Sentire bracelet app
 
 			       		var newEntry = ["2016-11-" + i , Number(random_int),  "11/" + String(i) + "/16"];
 			       		calData.push(newEntry);
-			       		console.log(newEntry);
-					    
 					};
-
-					console.log(calData);
-			
 
 		   var myConfig = {
 			  "type":"calendar",
@@ -209,41 +198,9 @@ web page for Sentire bracelet app
 			      "values":[null,null,null,null,null,null,null,null,null,null,null,null]
 			    },
 			    "values":calData
-			    //  "values":[
-			    //   ["2016-11-01", 15, "Nov 1st"],
-			    //   ["2016-11-02", 16, "Nov 2nd"],
-			    //   ["2016-11-03", 3, "Nov 3rd"],
-			    //   ["2016-11-04", 3, "Nov 4th"],
-			    //   ["2016-11-05", 5, "Nov 5th"],
-			    //   ["2016-11-06", 1, "Nov 6th"],
-			    //   ["2016-11-07", 2, "Nov 7th"],
-			    //   ["2016-11-08", 9, "Nov 8th"],
-			    //   ["2016-11-09", 3, "Nov 9th"],
-			    //   ["2016-11-10", 3, "Nov 10th"],
-			    //   ["2016-11-11", 4, "Nov 11th"],
-			    //   ["2016-11-12", 5, "Nov 12th"],
-			    //   ["2016-11-13", 10, "Nov 13th"],
-			    //   ["2016-11-14", 7, "Nov 14th"],
-			    //   ["2016-11-15", 4, "Nov 15th"],
-			    //   ["2016-11-16", 6, "Nov 16th"],
-			    //   ["2016-11-17", 12, "Nov 17th"],
-			    //   ["2016-11-18", 4, "Nov 18th"],
-			    //   ["2016-11-19", 1, "Nov 19th"],
-			    //   ["2016-11-20", 3, "Nov 20th"],
-			    //   ["2016-11-21", 3, "Nov 21st"],
-			    //   ["2016-11-22", 6, "Nov 22nd"],
-			    //   ["2016-11-23", 5, "Nov 23rd"],
-			    //   ["2016-11-24", 9, "Nov 24th"],
-			    //   ["2016-11-25", 7, "Nov 25th"],
-			    //   ["2016-11-26", 7, "Nov 26th"],
-			    //   ["2016-11-27", 6, "Nov 27th"],
-			    //   ["2016-11-28", 4, "Nov 28th"],
-			    //   ["2016-11-29", 5, "Nov 29th"],
-			    //   ["2016-11-30", 5, "Nov 30th"],
-			    // ]
 			  },
 			  "tooltip":{   //Tooltips
-			    "text":"On %data-info0,<br>recorded<br>%v times.", 
+			    "text":"On %data-info0,<br>you recorded<br>%v times.", 
 			    "thousands-separator":",",
 			    "font-family":"Arial",
 			    "font-color":"#ffb366",
@@ -256,7 +213,7 @@ web page for Sentire bracelet app
 			    "height":"22%",
 			    "sticky":true,
 			    "timeout":30000,
-			    "x":"72.5%",
+			    "x":"64.5%",
 			    "y":"32%"
 			  },
 			  "labels":[
@@ -267,15 +224,15 @@ web page for Sentire bracelet app
 			      "font-color":"#00344d",
 			      "font-size":16,
 			      "font-weight":"bold",
-			      "background-color":"#fff9e6",
+			      "background-color":"#f2f2f2",
 			      "border-width":1,
 			      "line-style":"dotted",
 			      "border-color":"white",
 			      "border-radius":"0px",
 			      "padding":"15%",
-			      "width":"25%",
+			      "width":"20%",
 			      "height":"45%",
-			      "x":"70%",
+			      "x":"65%",
 			      "y":"20%",
 			    },
 			    {
@@ -286,7 +243,7 @@ web page for Sentire bracelet app
 			      "line-style":"dotted",
 			      "width":"20%",
 			      "height":"22%",
-			      "x":"72.5%",
+			      "x":"65%",
 			      "y":"32%"
 			    },
 			    {
@@ -297,7 +254,7 @@ web page for Sentire bracelet app
 			      "font-weight":"bold",
 			      "width":"20%",
 			      "height":"15%",
-			      "x":"72.5%",
+			      "x":"65%",
 			      "y":"52%"
 			    },
 
@@ -323,13 +280,13 @@ web page for Sentire bracelet app
 				id : 'myChart', 
 				data : myConfig, 
 				height: 500, 
-				width: 725
+				width: 950,
 			});
 			});
 
 		   </script> 
 
-		    <div id='myChart'></div>
+		    <div id='myChart' style="margin-left: 150px;"></div>
 
             <div id="calendar_basic" style="width: 1000px; height: 350px;"></div>
 
