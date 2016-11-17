@@ -32,8 +32,8 @@ web page for Sentire bracelet app
     </head>
 
     <body>
-			<!--our first page-->
-		       <div data-role="page" id="home" data-theme="a">
+			<!--**********************first page**********************-->
+		    <div data-role="page" id="home" data-theme="a">
             <div data-role="header"  data-position="inline">
                 <h1>Sentire</h1>
             </div>
@@ -81,7 +81,7 @@ web page for Sentire bracelet app
                     <ul>
                         <li> <a href="#home" id="current" data-icon="home">Home</a>
                         <li> <a href="#calendar" id="navlink" data-icon="clock">Calendar</a>    
-                        <li> <a href="#goals" id="navlink" data-icon="bullets">My Goals</a>
+                        <li> <a href="#notes" id="navlink" data-icon="bullets">Notes</a>
                     </ul>
                 </div>
             </div>
@@ -299,10 +299,63 @@ web page for Sentire bracelet app
             	<ul>
             		<li> <a href="#home" id="navlink" data-icon='home'>Home</a>
             		 <li> <a href="#calendar"  id="current"  data-icon="clock">Calendar</a>         
-            		<li> <a href="#goals" id="navlink" data-icon="bullets">My Goals</a>
+            		<li> <a href="#notes" id="navlink" data-icon="bullets">Notes</a>
             	</ul>
             </div>
             </div>
+        </div>
+
+
+        <!-- **********************Start of Notes Page********************** -->
+
+        <div data-role="page" id="notes" data-theme="a">
+            <div data-role="header" data-position="inline">
+                <a data-icon="arrow-l" class="back" id="btnstyle" data-rel="back" back-btn="true">Back</a>
+                <h1>Notes</h1>
+            </div>
+
+            <div role="content" class="ui-content">
+
+            	<div id="notes">
+
+	            	<form>
+	                <!--<label for="time-1"></label>
+	                <input type="time" data-clear-btn="false" name="time-1" id="myTime" value=""> -->
+	                	<p>Leave notes for yourself about the last week that will be viewable on your calendar</p>
+	                	 <label for="note-1"><strong>Nov. 16, 2016</strong></label>
+	                	 <input type="text" name="note-1" id="note-1" value="">
+	               		 <label for="note-1"><strong>Nov. 17, 2016</strong></label>
+	                	 <input type="text" name="note-1" id="note-1" value="">
+	                	 <label for="note-2"><strong>Nov. 18, 2016</strong></label>
+	                	 <input type="text" name="note-2" id="note-2" value="">
+	                	 <label for="note-3"><strong>Nov. 19, 2016</strong></label>
+	                	 <input type="text" name="note-3" id="note-3" value="">
+	                	 <label for="note-4"><strong>Nov. 20, 2016</strong></label>
+	                	 <input type="text" name="note-4" id="note-4" value="">
+	                	 <label for="note-5"><strong>Nov. 21, 2016</strong></label>
+	                	 <input type="text" name="note-5" id="note-5" value="">
+
+	           		</form>
+
+           		</div>	
+
+
+
+
+
+             </div>
+
+
+         	<div data-role="footer">
+            <div data-role="navbar" class = "navbar">
+            	<ul>
+            		<li> <a href="#home" id="navlink" data-icon='home'>Home</a>
+            		 <li> <a href="#calendar"  id="navlink"  data-icon="clock">Calendar</a>         
+            		<li> <a href="#notes" id="current" data-icon="bullets">Notes</a>
+            	</ul>
+            </div>
+            </div>
+
         </div>
 
     </body>

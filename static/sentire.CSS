@@ -2,8 +2,6 @@
  * Sentire CSS
  */
 
-
-
 .ui-content {
 	background-color: white;
 	color: #3f3fa6;
@@ -28,6 +26,14 @@ div.ui-header.ui-bar-inherit{
 #navlink{
 	background-color: white;
 	color: #3f3fa6;
+}
+
+form {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
 }
 
 #current, #tabcurrent{
