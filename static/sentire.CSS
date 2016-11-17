@@ -35,6 +35,12 @@ form {
 	margin-bottom: 30px;
 	padding-bottom: 10px;
 }
+/*
+#btnstyle{
+	height: 10px;
+	width: 0px;
+
+}*/
 
 #current, #tabcurrent{
 	background-color: #e6e6e6;
