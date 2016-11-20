@@ -1,4 +1,7 @@
 from flask import Flask, request, jsonify
+
+import os
+
 app = Flask(__name__)
 
 curr_temp = 0
@@ -15,6 +18,9 @@ def temp_data():
         response = jsonify(request.form) # echo the received info back
         return response
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.debug = True
+    port = os.getuid()
+    # Flask will print the port anyhow, but let's do so too
+    print('Running on port '+str(port))
+    app.run('0.0.0.0',port)
