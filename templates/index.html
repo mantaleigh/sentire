@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<!--
+web page for Sentire bracelet app
+-->
+
+<html>
+    <head>
+	    <meta charset="UTF-8">  
+	    <title>Sentire</title>
+	    <link href="static/sentire.css" rel="stylesheet" type="text/CSS">
+	    
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">  google.charts.load('current', {'packages':['corechart','calendar']});</script>
+
+            <script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
+			<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+			ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+           	
+           <!-- <meta name="viewport" content="width=device­width, user­scalable=no" />
+
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-webapp-status-bar-style" content="black">
+
+
+            <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi"/> -->
+        
+    </head>
+
+    <body>
+			<!--**********************first page**********************-->
+		    <div data-role="page" id="home" data-theme="a">
+            <div data-role="header"  data-position="inline">
+                <h1>Sentire</h1>
+            </div>
+                
+			<!-- /content -->
+
+			<div role="content" class="ui-content">
+				
+				<script>
+			     
+			      google.charts.setOnLoadCallback(drawLineChart);
+
+			      function drawLineChart() {
+			        var data = google.visualization.arrayToDataTable([
+			          ['Day', 'Mood', 'Diet'],
+			          ['Su',  08,      40],
+			          ['M',  50,      90],
+			          ['T',  50,      90],
+			          ['W',  60,       70],
+			          ['Th',  63,      60],
+			          ['F',  90,      70],
+			          ['Sa',  100,      30]
+			        ]);
+
+			        var options = {
+			          title: 'Mood and Diet',
+			          curveType: 'function',
+			          legend: { position: 'bottom' },
+			          colors:['#9999ff','#ffb366']
+			        };
+
+			        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+			        chart.draw(data, options);
+			      }
+			    </script>
+
+				 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+			</div>
+
+            <div data-role="footer">
+                
+                <div data-role="navbar" class = "navbar">
+                    <ul>
+                        <li> <a href="#home" id="current" data-icon="home">Home</a>
+                        <li> <a href="#calendar" id="navlink" data-icon="clock">Calendar</a>    
+                        <li> <a href="#notes" id="navlink" data-icon="bullets">Notes</a>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
+        
+        <!-- ***********************Start of Calendar Page*********************** -->
+        <div data-role="page" id="calendar" data-theme="a">
+            <div data-role="header" data-position="inline">
+                <a data-icon="carat-l" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" id="btnstyle" data-rel="back" back-btn="true"></a>
+                <h1>Your Calendar</h1>
+            </div>
+
+            <div role="content" class="ui-content">
+
+            <script>
+		   //   // google.charts.load("current", {packages:["calendar"]});
+		   //    google.charts.setOnLoadCallback(drawChart);
+
+		   // 	function drawChart() {
+		   //     var dataTable = new google.visualization.DataTable();
+		   //     dataTable.addColumn({ type: 'date', id: 'Date' });
+		   //     dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+
+		   //     //september cal
+		   //     for (i = 0; i < 31; i++) { 
+			  //      		var random_int = Math.floor(Math.random() * 9);
+
+					//     dataTable.addRows([[new Date(2016, 8, i+1), random_int]]);
+					// };
+
+			  //  //october cal
+		   //     for (i = 0; i < 31; i++) { 
+			  //      		var random_int = Math.floor(Math.random() * 9);
+
+					//     dataTable.addRows([[new Date(2016, 9, i+1), random_int]]);
+					// };
+
+			  //  //november cal
+		   //     for (i = 0; i < 30; i++) { 
+			  //      		var random_int = Math.floor(Math.random() * 9);
+
+					//     dataTable.addRows([[new Date(2016, 10, i+1), random_int]]);
+					// };
+
+
+		   //     var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+		   //     var options = {
+		   //       title: "Your Bracelet Use",
+		   //       height: 350,
+		   //     };
+
+		   //     chart.draw(dataTable, options);
+		  	//  }
+		   //  
+
+
+		   var calData = [];
+
+		 		 // october cal
+		       for (i = 1; i <= 31; i++) { 
+			       		var random_int = Math.floor(Math.random() * 10);
+
+			       		var newEntry = ["2016-10-" + i , Number(random_int),  "10/" + String(i) + "/16"];
+			       		calData.push(newEntry);
+					    
+					};
+				 // november cal
+		       for (i = 1; i < 31; i++) { 
+			       		var random_int = Math.floor(Math.random() * 10);
+
+			       		var newEntry = ["2016-11-" + i , Number(random_int),  "11/" + String(i) + "/16"];
+			       		calData.push(newEntry);
+					};
+
+		   var myConfig = {
+			  "type":"calendar",
+			  "title":{
+			    "text":"My Tracked Data",
+			    "font-family":"Arial",
+			    "font-color":"#3f3fa6",
+			    "font-size":30,
+			  },
+			  "subtitle":{
+			    "text":"2016",
+			    "font-family":"Arial",
+			    "font-color":"##3f3fa6",
+			    "font-size":12,
+			    "font-weight":"normal",
+			    "y":"10%"
+			  },
+			  "background-color":"white",
+			  "options":{
+			    "year":{
+			      "text":"2016",
+			      "visible":false,
+			      "font-size":16,
+			      "palette": ['#9999ff','#ffb366'],
+			    },
+			    "start-month":10, //Octover
+			    "end-month":11, //November
+			    "firstday":"s", //Sunday,
+			    "palette":['#9999ff','#ffb366'],
+			    "weekday":{
+			      "values":["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"],
+			      "item":{
+			        "font-color":"#00344d",
+			        "font-family":"Arial",
+			        "font-size":10
+			      }
+			    },
+			    "month":{
+			      "values":[null,null,null,null,null,null,null,null,null,null,null,null]
+			    },
+			    "values":calData
+			  },
+			  "tooltip":{   //Tooltips
+			    "text":"On %data-info0,<br>you recorded<br>%v times.", 
+			    "thousands-separator":",",
+			    "font-family":"Arial",
+			    "font-color":"#ffb366",
+			    "font-size":14,
+			    "align":"center",
+			    "background-color":"none",
+			    "border-color":"none",
+			    "padding":"20%",
+			    "width":"20%",
+			    "height":"22%",
+			    "sticky":true,
+			    "timeout":30000,
+			    "x":"64.5%",
+			    "y":"32%"
+			  },
+			  "labels":[
+			    {
+			      "text":"Daily Data Inputs",
+			      "vertical-align":"top",
+			      "font-family":"Arial",
+			      "font-color":"#3f3fa6",
+			      "font-size":16,
+			      "font-weight":"bold",
+			      "background-color":"#f2f2f2",
+			      "border-width":1,
+			      "line-style":"dotted",
+			      "border-color":"white",
+			      "border-radius":"0px",
+			      "padding":"15%",
+			      "width":"20%",
+			      "height":"45%",
+			      "x":"65%",
+			      "y":"20%",
+			    },
+			    {
+			      "background-color":"none",
+			      "border-color": "none",
+			      "border-width":1,
+			      "border-radius":"5px",
+			      "line-style":"dotted",
+			      "width":"20%",
+			      "height":"22%",
+			      "x":"65%",
+			      "y":"32%"
+			    },
+			    {
+			      "text":"Daily Goal: 6 inputs",
+			      "font-family":"Arial",
+			      "font-color":"#00344d",
+			      "font-size":12,
+			      "font-weight":"bold",
+			      "width":"20%",
+			      "height":"15%",
+			      "x":"65%",
+			      "y":"52%"
+			    },
+
+			  ],
+			  "plot":{
+			    "value-box":{ //Numbered Calendar Days
+			      "font-family":"Courier",
+			      "font-size":15,
+			      "font-color":"white",
+			      "font-weight":"bold"
+			    }
+			  },
+			  "plotarea":{
+			    "margin-top":"20%",
+			    "margin-bottom":"10%",
+			    "margin-left":"15%",
+			    "margin-right":"35%"
+			  }
+			};
+			 
+			zingchart.loadModules('calendar', function(){   
+			zingchart.render({ 
+				id : 'myChart', 
+				data : myConfig, 
+				height: 500, 
+				width: 950,
+			});
+			});
+
+		   </script> 
+
+		    <div id='myChart' style="margin-left: 150px;"></div>
+
+
+            <!-- <div id="calendar_basic" style="width: 1000px; height: 350px;"></div> -->
+
+            <br> <br> <br>
+            </div>
+            
+            <div data-role="footer">
+            <div data-role="navbar" class = "navbar">
+            	<ul>
+            		<li> <a href="#home" id="navlink" data-icon='home'>Home</a>
+            		 <li> <a href="#calendar"  id="current"  data-icon="clock">Calendar</a>         
+            		<li> <a href="#notes" id="navlink" data-icon="bullets">Notes</a>
+            	</ul>
+            </div>
+            </div>
+        </div>
+
+
+        <!-- **********************Start of Notes Page********************** -->
+
+        <div data-role="page" id="notes" data-theme="a">
+            <div data-role="header" data-position="inline">
+                <a data-icon="carat-l" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"  id="btnstyle" data-rel="back" back-btn="true"></a>
+                <h1>Notes</h1>
+            </div>
+
+            <div role="content" class="ui-content">
+
+            	<div id="notes">
+
+	            	<form>
+	                <!--<label for="time-1"></label>
+	                <input type="time" data-clear-btn="false" name="time-1" id="myTime" value=""> -->
+	                	<p>Enter three words to describe each day</p>
+	                	 <label for="note-1"><strong>Nov. 16, 2016</strong></label>
+	                	 <input type="text" name="note-1" id="note-1" value="">
+	               		 <label for="note-1"><strong>Nov. 17, 2016</strong></label>
+	                	 <input type="text" name="note-1" id="note-1" value="">
+	                	 <label for="note-2"><strong>Nov. 18, 2016</strong></label>
+	                	 <input type="text" name="note-2" id="note-2" value="">
+	                	 <label for="note-3"><strong>Nov. 19, 2016</strong></label>
+	                	 <input type="text" name="note-3" id="note-3" value="">
+	                	 <label for="note-4"><strong>Nov. 20, 2016</strong></label>
+	                	 <input type="text" name="note-4" id="note-4" value="">
+	                	 <label for="note-5"><strong>Nov. 21, 2016</strong></label>
+	                	 <input type="text" name="note-5" id="note-5" value="">
+
+	           		</form>
+
+           		</div>	
+
+
+
+
+
+             </div>
+
+
+         	<div data-role="footer">
+            <div data-role="navbar" class = "navbar">
+            	<ul>
+            		<li> <a href="#home" id="navlink" data-icon='home'>Home</a>
+            		 <li> <a href="#calendar"  id="navlink"  data-icon="clock">Calendar</a>         
+            		<li> <a href="#notes" id="current" data-icon="bullets">Notes</a>
+            	</ul>
+            </div>
+            </div>
+
+        </div>
+
+    </body>
+
+
+
+
+</html>

@@ -1,0 +1,65 @@
+/*
+ * Sentire CSS
+ */
+
+.ui-content {
+	background-color: white;
+	color: #3f3fa6;
+}
+
+h2 {
+	color: #3f3fa6;
+
+}
+
+div.ui-header.ui-bar-inherit{
+	background-color: white;
+	color: #3f3fa6;
+}
+
+.ui-navbar{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#navlink{
+	background-color: white;
+	color: #3f3fa6;
+}
+
+form {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+}
+
+
+#current, #tabcurrent{
+	background-color: #e6e6e6;
+	color: #3f3fa6;
+}
+
+#navlink, #current {
+	border-width: 1px;
+	border-color: #d9d9d9;
+}
+
+#calendar_basic{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 120px;
+}
+
+#curve_chart {
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 90px;
+}
+
+#myChart {
+	margin-right: 300px;
+}
+
