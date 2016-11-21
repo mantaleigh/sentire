@@ -32,6 +32,7 @@ const int LDR = 0;
 const int  buttonPin_one = 2;    // the pin that the pushbutton is attached to
 const int  buttonPin_two = 3;
 const int ledPin = 13;       // the pin that the LED is attached to
+const int temperaturePin = 1;
 
 // Variables will change:
 int buttonOnePushCounter = 0;   // counter for the number of button presses
@@ -44,7 +45,7 @@ int lastButtonTwoState = 0;     // previous state of the button
 
 long previousMillis = 0;
 
-long interval = 5000;
+long interval = 60000;
 
 
 void setup() {
@@ -55,6 +56,7 @@ void setup() {
   pinMode(ledPin, OUTPUT);
 
   pinMode(LDR, INPUT);
+  pinMode(temperaturePin, INPUT);
   
   Serial.begin(9600);
  
@@ -64,18 +66,28 @@ void setup() {
 void loop() {
 
   unsigned long currentMillis = millis();
+  float voltage, degreesC, degreesF;
 
   if(currentMillis - previousMillis > interval) { 
     previousMillis = currentMillis;
     // read the photoresister 
     int v = analogRead(LDR);
-    Serial.print("voltage from photo resistor:    ");
+    Serial.print("light: ");
     Serial.println(v); 
+
+    int temp_voltage = getVoltage(temperaturePin);
+    degreesC = (temp_voltage - 0.5) * 100.0;
+    degreesF - degreesC * (9.0/5.0) + 32.0;
+
+    Serial.print("temperature: ");
+    Serial.println(degreesF);
+    
   }
   
   // read the pushbutton input pin:
   buttonOneState = digitalRead(buttonPin_one);
   buttonTwoState = digitalRead(buttonPin_two);
+
 
   // compare the buttonState to its previous state
   if (buttonOneState != lastButtonOneState) {
@@ -84,13 +96,11 @@ void loop() {
       // if the current state is HIGH then the button
       // wend from off to on:
       buttonOnePushCounter++;
-      Serial.println("button one on");
-      Serial.print("number of button one pushes:  ");
-      Serial.println(buttonOnePushCounter);
+      Serial.println("button_1: on");
     } else {
       // if the current state is LOW then the button
       // wend from on to off:
-      Serial.println("button one off");
+      // Serial.println("button one off");
     }
     // Delay a little bit to avoid bouncing
     delay(50);
@@ -104,13 +114,11 @@ void loop() {
       // if the current state is HIGH then the button
       // wend from off to on:
       buttonTwoPushCounter++;
-      Serial.println("button two on");
-      Serial.print("number of button two pushes:  ");
-      Serial.println(buttonTwoPushCounter);
+      Serial.println("button_2: on");
     } else {
       // if the current state is LOW then the button
       // wend from on to off:
-      Serial.println("button two off");
+      //Serial.println("button two off");
     }
     // Delay a little bit to avoid bouncing
     delay(50);
@@ -132,5 +140,13 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }
 
+}
+
+
+float getVoltage(int pin)
+{ 
+  return(analogRead(pin) * 0.004882814);
+
+}
 }
 
