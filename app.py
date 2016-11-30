@@ -42,6 +42,8 @@ def incoming_data():
         key = request.form.keys()[0]
         if "button" in key:
             data[key]["value"] += 1
+        elif "temp" in key:
+            data[key]["values"] += [float(request.form[key])]
         else:
             data[key]["values"] += [int(request.form[key])]
         

@@ -32,7 +32,7 @@ const int LDR = 0;
 const int  buttonPin_one = 2;    // the pin that the pushbutton is attached to
 const int  buttonPin_two = 3;
 const int ledPin = 13;       // the pin that the LED is attached to
-const int temperaturePin = 1;
+const int temperaturePin = A1;
 
 // Variables will change:
 int buttonOnePushCounter = 0;   // counter for the number of button presses
@@ -45,7 +45,7 @@ int lastButtonTwoState = 0;     // previous state of the button
 
 long previousMillis = 0;
 
-long interval = 60000;
+long interval = 10000;
 
 
 void setup() {
@@ -56,7 +56,7 @@ void setup() {
   pinMode(ledPin, OUTPUT);
 
   pinMode(LDR, INPUT);
-  pinMode(temperaturePin, INPUT);
+  //pinMode(temperaturePin, INPUT);
   
   Serial.begin(9600);
  
@@ -75,9 +75,17 @@ void loop() {
     Serial.print("light: ");
     Serial.println(v); 
 
-    int temp_voltage = getVoltage(temperaturePin);
-    degreesC = (temp_voltage - 0.5) * 100.0;
-    degreesF - degreesC * (9.0/5.0) + 32.0;
+  voltage = getVoltage(temperaturePin);
+
+  // Now we'll convert the voltage to degrees Celsius.
+  // This formula comes from the temperature sensor datasheet:
+
+  degreesC = (voltage - 0.5) * 100.0;
+
+  // While we're at it, let's convert degrees Celsius to Fahrenheit.
+  // This is the classic C to F conversion formula:
+
+  degreesF = degreesC * (9.0/5.0) + 32.0;
 
     Serial.print("temperature: ");
     Serial.println(degreesF);
@@ -86,7 +94,7 @@ void loop() {
   
   // read the pushbutton input pin:
   buttonOneState = digitalRead(buttonPin_one);
-  buttonTwoState = digitalRead(buttonPin_two);
+//  buttonTwoState = digitalRead(buttonPin_two);
 
 
   // compare the buttonState to its previous state
@@ -106,28 +114,28 @@ void loop() {
     delay(50);
   }
 
-
-  // compare the buttonState to its previous state
-  if (buttonTwoState != lastButtonTwoState) {
-    // if the state has changed, increment the counter
-    if (buttonTwoState == HIGH) {
-      // if the current state is HIGH then the button
-      // wend from off to on:
-      buttonTwoPushCounter++;
-      Serial.println("button_2: on");
-    } else {
-      // if the current state is LOW then the button
-      // wend from on to off:
-      //Serial.println("button two off");
-    }
-    // Delay a little bit to avoid bouncing
-    delay(50);
-  }
+//
+//  // compare the buttonState to its previous state
+//  if (buttonTwoState != lastButtonTwoState) {
+//    // if the state has changed, increment the counter
+//    if (buttonTwoState == HIGH) {
+//      // if the current state is HIGH then the button
+//      // wend from off to on:
+//      buttonTwoPushCounter++;
+//      Serial.println("button_2: on");
+//    } else {
+//      // if the current state is LOW then the button
+//      // wend from on to off:
+//      //Serial.println("button two off");
+//    }
+//    // Delay a little bit to avoid bouncing
+//    delay(50);
+//  }
   
   // save the current state as the last state,
   //for next time through the loop
   lastButtonOneState = buttonOneState;
-  lastButtonTwoState = buttonTwoState;
+  //lastButtonTwoState = buttonTwoState;
 
 
   // turns on the LED every four button pushes by
