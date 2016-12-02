@@ -45,7 +45,7 @@ int lastButtonTwoState = 0;     // previous state of the button
 
 long previousMillis = 0;
 
-long interval = 10000;
+long interval = 500;
 
 
 void setup() {
@@ -156,5 +156,5 @@ float getVoltage(int pin)
   return(analogRead(pin) * 0.004882814);
 
 }
-}
+
 

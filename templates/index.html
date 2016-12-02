@@ -6,13 +6,14 @@
       <title>Sentire</title>
       <link href="static/sentire.css" rel="stylesheet" type="text/CSS">
 
-      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-      <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-      <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-      <!-- GOOGLE CHARTS -->
+      <script src="static/jquery-1.9.1.min.js"></script>
+     <script src="static/jquery.mobile-1.4.0.min.js"></script>
+      <script type="text/javascript" src="static/chartsLoader.js"></script> 
+
+      <link rel="stylesheet" href="static/jquery.mobile-1.4.0.min.css" />
+      <link rel="stylesheet" href="static/font-awesome.min.css">
+
       <script type="text/javascript">
         {% include 'charts.js' %}
       </script>
@@ -21,7 +22,7 @@
       <meta name="apple-mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-webapp-status-bar-style" content="black">
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi"/>
-        
+       
     </head>
     <body>
 
@@ -37,11 +38,11 @@
           </div> <!-- /content -->
 
           <div data-role="footer">
-              <div data-role="navbar" class = "navbar">
+              <div data-role="navbar" class="navbar">
                   <ul>
                       <li> <a href="#home" id="current" data-icon="home">Home</a>
                       <li> <a href="#graphs" id="navlink" data-icon="clock">Graphs</a>    
-                      <li> <a href="#notes" id="navlink" data-icon="bullets">Notes</a>
+                      <li> <a href="#customize" id="navlink" data-icon="bullets">Customize</a>
                   </ul>
               </div> <!-- /navbar -->
           </div> <!-- /footer -->
@@ -63,31 +64,37 @@
                 <tr>
                   <td><div id="calendar_chart_div" style="border: 1px solid #ccc"></div></td>
                 </tr>
+                <tr>
+                  <td> <div id="mood_chart_div" style="border: 1px solid #ccc"></div></td>
+                </tr>
+                <tr>
+                  <td> <div id="food_chart_div" style="border: 1px solid #ccc"></div></td>
+                </tr>
               </table>
 
             </div> <!-- content -->
             
             <div data-role="footer">
-            <div data-role="navbar" class = "navbar">
-              <ul>
-                <li> <a href="#home" id="navlink" data-icon='home'>Home</a>
-                 <li> <a href="#graphs"  id="current"  data-icon="clock">Graphs</a>         
-                <li> <a href="#notes" id="navlink" data-icon="bullets">Notes</a>
-              </ul>
-            </div>
+              <div data-role="navbar" class = "navbar">
+                <ul>
+                  <li> <a href="#home" id="navlink" data-icon='home'>Home</a>
+                   <li> <a href="#graphs"  id="current"  data-icon="clock">Graphs</a>         
+                  <li> <a href="#customize" id="navlink" data-icon="bullets">Customize</a>
+                </ul>
+              </div>
             </div>
         </div>
 
-        <!-- **********************Start of Notes Page********************** -->
+        <!-- **********************Start of customize Page********************** -->
 
-        <div data-role="page" id="notes" data-theme="a">
+        <div data-role="page" id="customize" data-theme="a">
             <div data-role="header" data-position="inline">
                 <a data-icon="carat-l" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"  id="btnstyle" data-rel="back" back-btn="true"></a>
-                <h1>Notes</h1>
+                <h1>Customize</h1>
             </div>
 
             <div role="content" class="ui-content">
-              <div id="notes">
+              <div id="customize">
                 <form>
                   <!--<label for="time-1"></label>
                   <input type="time" data-clear-btn="false" name="time-1" id="myTime" value=""> -->
@@ -113,7 +120,7 @@
                 <ul>
                   <li> <a href="#home" id="navlink" data-icon='home'>Home</a>
                    <li> <a href="#graphs"  id="navlink"  data-icon="clock">Graphs</a>         
-                  <li> <a href="#notes" id="current" data-icon="bullets">Notes</a>
+                  <li> <a href="#customize" id="current" data-icon="bullets">Customize</a>
                 </ul>
               </div>
             </div>

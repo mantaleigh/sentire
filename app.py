@@ -25,9 +25,7 @@ data = {
 
 @app.route('/')
 def home():
- #   return "The current temperature in F is: " + str(curr_light) + " and was updated at: " + str(time_changed)
  return render_template("index.html")
- # return str(data) # temporary
 
 @app.route('/get_data', methods=["GET"])
 def get_data():
