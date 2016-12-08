@@ -13,5 +13,5 @@ while True:
 
 	post_key = line[:3]
 	post_data = line[4:]
-	r = requests.post(host + '/incoming_data', data={post_key.strip():post_data.strip()}) # stripping to be doubly sure? ¯\_(ツ)_/¯
+	r = requests.post(host + '/incoming_data', data={post_key.strip():post_data.strip()}) # stripping to be doubly sure?
 	print r.text

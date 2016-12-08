@@ -8,8 +8,9 @@
 
 
       <script src="static/jquery-1.9.1.min.js"></script>
-     <script src="static/jquery.mobile-1.4.0.min.js"></script>
+      <script src="static/jquery.mobile-1.4.0.min.js"></script>
       <script type="text/javascript" src="static/chartsLoader.js"></script> 
+      <script type="text/javascript" src="static/form_behavior.js"></script>
 
       <link rel="stylesheet" href="static/jquery.mobile-1.4.0.min.css" />
       <link rel="stylesheet" href="static/font-awesome.min.css">
@@ -95,22 +96,87 @@
 
             <div role="content" class="ui-content">
               <div id="customize">
-                <form>
-                  <!--<label for="time-1"></label>
-                  <input type="time" data-clear-btn="false" name="time-1" id="myTime" value=""> -->
-                    <p>Enter three words to describe each day</p>
-                     <label for="note-1"><strong>Nov. 16, 2016</strong></label>
-                     <input type="text" name="note-1" id="note-1" value="">
-                     <label for="note-1"><strong>Nov. 17, 2016</strong></label>
-                     <input type="text" name="note-1" id="note-1" value="">
-                     <label for="note-2"><strong>Nov. 18, 2016</strong></label>
-                     <input type="text" name="note-2" id="note-2" value="">
-                     <label for="note-3"><strong>Nov. 19, 2016</strong></label>
-                     <input type="text" name="note-3" id="note-3" value="">
-                     <label for="note-4"><strong>Nov. 20, 2016</strong></label>
-                     <input type="text" name="note-4" id="note-4" value="">
-                     <label for="note-5"><strong>Nov. 21, 2016</strong></label>
-                     <input type="text" name="note-5" id="note-5" value="">
+                <h3>Select the function for each bead you've snapped in</h3>
+                <form action="/" method="post">
+                  <label for="a_1">Passive Input #1</label>
+                  <select name="a_1" class="a_1">
+                     <option>Choose Input Type</option>
+                     <option value="temperature">Temperature</option>
+                     <option value="light">Light</option>
+                     <option value="sound">Sound</option>
+                  </select>
+                  <label for="a_2">Passive Input #2</label>
+                  <select name="a_2" class="a_2">
+                     <option>Choose Input Type</option>
+                     <option value="temperature">Temperature</option>
+                     <option value="light">Light</option>
+                     <option value="sound">Sound</option>
+                  </select>
+                  <label for="a_3">Passive Input #3</label>
+                  <select name="a_3" class="a_3">
+                     <option>Choose Input Type</option>
+                     <option value="temperature">Temperature</option>
+                     <option value="light">Light</option>
+                     <option value="sound">Sound</option>
+                  </select>
+
+                  <br><hr><br>
+
+                  <label for="d_1">Active Input #1</label>
+                  <select name="d_1" class="d_1">
+                     <option>Choose Input Type</option>
+                     <option value="sleep">Sleep</option>
+                     <option value="water">Water</option>
+                     <option value="eating">Eating</option>
+                     <option value="exercising">Exercising</option>
+                     <option value="mood">Mood</option>
+                  </select>
+                  <div class="d_1_mood_desc" style="display:none;">
+                    <label for="d_1_mood_desc">What mood for this button?</label>
+                    <input type="text" name="d_1_mood_desc" placeholder="Specify mood to track"/>
+                  </div>
+                  <label for="d_2">Active Input #2</label>
+                  <select name="d_2" class="d_2">
+                     <option>Choose Input Type</option>
+                     <option value="sleep">Sleep</option>
+                     <option value="water">Water</option>
+                     <option value="eating">Eating</option>
+                     <option value="exercising">Exercising</option>
+                     <option value="mood">Mood</option>
+                  </select>
+                  <div class="d_2_mood_desc" style="display:none;">
+                    <label for="d_2_mood_desc">What mood for this button?</label>
+                    <input type="text" name="d_2_mood_desc" placeholder="Specify mood to track"/>
+                  </div>
+                  <label for="d_3">Active Input #3</label>
+                  <select name="d_3" class="d_3">
+                     <option>Choose Input Type</option>
+                     <option value="sleep">Sleep</option>
+                     <option value="water">Water</option>
+                     <option value="eating">Eating</option>
+                     <option value="exercising">Exercising</option>
+                     <option value="mood">Mood</option>
+                  </select>
+                  <div class="d_3_mood_desc" style="display:none;">
+                    <label for="d_3_mood_desc">What mood for this button?</label>
+                    <input type="text" name="d_3_mood_desc" placeholder="Specify mood to track"/>
+                  </div>
+                  <label for="d_4">Active Input #4</label>
+                  <select name="d_4" class="d_4">
+                     <option>Choose Input Type</option>
+                     <option value="sleep">Sleep</option>
+                     <option value="water">Water</option>
+                     <option value="eating">Eating</option>
+                     <option value="exercising">Exercising</option>
+                     <option value="mood">Mood</option>
+                  </select>
+                  <div class="d_4_mood_desc" style="display:none;">
+                    <label for="d_4_mood_desc">What mood for this button?</label>
+                    <input type="text" name="d_4_mood_desc" placeholder="Specify mood to track"/>
+                  </div>
+                  <br><hr>
+                  <input type="submit" value="Update Customizations">
+
                 </form>
               </div>  
              </div>

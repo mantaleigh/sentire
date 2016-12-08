@@ -6,15 +6,15 @@
 
 
 // analog sensor pins -- these are read every minute (or whatever)
-const int a_1 = 1
-const int a_2 = 2
-const int a_3 = 3
+const int a_1 = 1;
+const int a_2 = 2;
+const int a_3 = 3;
 
 // digital sensor pins
-const int d_1 = 1
-const int d_2 = 2
-const int d_3 = 3
-const int d_4 = 4
+const int d_1 = 1;
+const int d_2 = 2;
+const int d_3 = 3;
+const int d_4 = 4;
 
 const int ledPin = 13;       // the pin that the LED is attached to
 

@@ -5,6 +5,7 @@
 .ui-content {
 	background-color: white;
 	color: #3f3fa6;
+	margin-bottom: 60px;
 }
 
 h2 {
@@ -65,4 +66,8 @@ form {
 
 .graph-table { 
 	width: 100%;
+}
+
+h3 { 
+	text-align: center;
 }

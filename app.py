@@ -1,9 +1,9 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 import os, datetime
 
 app = Flask(__name__)
 
-# initialize data dict -- this should be a database eventually but ¯\_(ツ)_/¯
+# initialize data dict -- this should be a database eventually
 data = {
     "light_data": {
         "values": [],
@@ -24,7 +24,7 @@ data = {
     "water_data": {
         "value": 0,
         "timestamps": []
-    }
+    },
     "eating_data": {
         "value": 0,
         "timestamps": []
@@ -43,29 +43,30 @@ data = {
 
 # example of the currently_tracking dict
 # {
-#    a_1: 'temperature',
-#    a_3: 'light',
-#    d_2: 'sleep',
-#    d_3: 'mood: CUSTOM MOOD HERE',
-#    d_4: 'mood: CUSTOM MOOD HERE',
+#    'a_1': 'temperature',
+#    'a_3': 'light',
+#    'd_2': 'sleep',
+#    'd_3': 'mood: CUSTOM MOOD HERE',
+#    'd_4': 'mood: CUSTOM MOOD HERE',
 # }
 
 currently_tracking = {} 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def home():
- return render_template("index.html")
-
-# endpoint to submit the current customizations of the bracelet
-@app.route('/submit_custom', methods=["GET", "POST"])
-def submit_custom(): 
     global currently_tracking
 
     if request.method == "POST": 
         for k in request.form.keys(): 
-            currently_tracking[k] = request.form[k]
+            if request.form[k] != "Choose Input Type":
+                if request.form[k] == "mood":
+                    detail_key = k + '_mood_desc'
+                    currently_tracking[k] = "mood: " + request.form[detail_key].encode('ascii')
+                elif 'mood_desc' not in k:
+                    currently_tracking[k] = request.form[k].encode('ascii')
 
-    return jsonify(currently_tracking)
+    print currently_tracking # for testing
+    return render_template("index.html")
 
 @app.route('/get_data', methods=["GET"])
 def get_data():
@@ -83,7 +84,8 @@ def incoming_data():
         if pin in currently_tracking.keys(): # yay! you're tracking what just came across!
             if currently_tracking[pin] == "temperature":
                 voltage = float(request.form[pin]) * 0.004882814
-                degreesF = degreesC * (9.0/5.0) + 32.0;
+                degreesC = (voltage - 0.5) * 100.0
+                degreesF = degreesC * (9.0/5.0) + 32.0
                 data['temp_data']['values'] += [degreesF]
                 data['temp_data']['timestamps'] += [datetime.datetime.now()]
             elif currently_tracking[pin] == "light":
@@ -108,12 +110,11 @@ def incoming_data():
                 data['eating_data']['timestamps'] += [datetime.datetime.now()]
             elif "mood" in currently_tracking[pin]:
                 mood_text = currently_tracking[pin][6:] # strip the custom mood from the tracking info
-                if mood_text in data['moods'].keys():
+                if mood_text in data['moods_data'].keys():
                     data['moods_data'][mood_text]['value'] += 1
                     data['moods_data'][mood_text]['timestamps'] += [datetime.datetime.now()]
                 else: 
-                    data['moods_data'][mood_text]['value'] = 1
-                    data['moods_data'][mood_text]['timestamps'] = [datetime.datetime.now()]
+                    data['moods_data'][mood_text] = {'value':1, 'timestamps':[datetime.datetime.now()]}
         
         return jsonify(request.form) # echo the received info back
 
