@@ -27,22 +27,24 @@ $(function() {
 
   function drawLineChart() {
 
-    var data = document.getElementById("data").innerHTML;
-    var data_output = JSON.parse(String(data));
+    var data1 = document.getElementById("data").innerHTML;
+    var data_output = JSON.parse(String(data1));
 
     console.log(data_output.values.light_data);
     console.log(data_output.values.temp_data);
 
     var data = google.visualization.arrayToDataTable([
       ['Time', 'Light', 'Temperature', 'Noise'],
-      ['Su',  08,      40,      40],
-      ['M',  50,      90,      50],
+      ['Su',    08,      40,      40],
+      ['M',   50,      90,      50],
       ['T',  50,      90,      30],
       ['W',  60,       70,      40],
       ['Th',  63,      60,      50],
       ['F',  90,      70,      60],
       ['Sa',  100,      30,      40]
     ]);
+
+    console.log(data);
 
     var options = {
       title: 'Mood and Diet',
