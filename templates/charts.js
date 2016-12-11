@@ -10,8 +10,11 @@ $(function() {
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         $.getJSON($SCRIPT_ROOT+"/get_data",
             function(data) {
+               
                 $("#data").text(JSON.stringify(data));
-            });
+
+                
+           });
     });
 
   google.charts.load('current', {'packages':['corechart','calendar', 'timeline', 'scatter']});
@@ -20,24 +23,32 @@ $(function() {
   google.charts.setOnLoadCallback(drawLineChart);
   google.charts.setOnLoadCallback(drawMoodChart);
   google.charts.setOnLoadCallback(drawFoodChart);
+  
 
   function drawLineChart() {
+
+    var data = document.getElementById("data").innerHTML;
+    var data_output = JSON.parse(String(data));
+
+    console.log(data_output.values.light_data);
+    console.log(data_output.values.temp_data);
+
     var data = google.visualization.arrayToDataTable([
-      ['Day', 'Mood', 'Diet'],
-      ['Su',  08,      40],
-      ['M',  50,      90],
-      ['T',  50,      90],
-      ['W',  60,       70],
-      ['Th',  63,      60],
-      ['F',  90,      70],
-      ['Sa',  100,      30]
+      ['Time', 'Light', 'Temperature', 'Noise'],
+      ['Su',  08,      40,      40],
+      ['M',  50,      90,      50],
+      ['T',  50,      90,      30],
+      ['W',  60,       70,      40],
+      ['Th',  63,      60,      50],
+      ['F',  90,      70,      60],
+      ['Sa',  100,      30,      40]
     ]);
 
     var options = {
       title: 'Mood and Diet',
       curveType: 'function',
       legend: { position: 'bottom' },
-      colors:['#9999ff','#ffb366']
+      colors:['#9999ff','#ffb366','#94b8b8']
     };
 
     var lineChart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
