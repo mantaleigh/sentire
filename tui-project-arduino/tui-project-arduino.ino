@@ -11,10 +11,10 @@ const int a_2 = 2;
 const int a_3 = 3;
 
 // digital sensor pins
-const int d_1 = 1;
-const int d_2 = 2;
-const int d_3 = 3;
-const int d_4 = 4;
+const int d_1 = 2;
+const int d_2 = 3;
+const int d_3 = 4;
+const int d_4 = 5;
 
 const int ledPin = 13;       // the pin that the LED is attached to
 
@@ -34,7 +34,7 @@ int last_d_4_state = 0;     // previous state of the button
 
 // Analog read interval stuff
 long previousMillis = 0;
-long interval = 500;
+long interval = 3000;
 
 
 void setup() {
@@ -90,7 +90,7 @@ void loop() {
   if (d_1_state != last_d_1_state) {
     if (d_1_state == HIGH) {
       // if the current state is HIGH then the button went from off to on
-      Serial.println("d_1 on");
+    //  Serial.println("d_1 on");
       digitalWrite(ledPin, HIGH); // indicate with on board LED
     }
 
@@ -101,7 +101,7 @@ void loop() {
   if (d_2_state != last_d_2_state) {
     if (d_2_state == HIGH) {
       // if the current state is HIGH then the button went from off to on
-      Serial.println("d_2 on");
+    //  Serial.println("d_2 on");
       digitalWrite(ledPin, HIGH); // indicate with on board LED
     }
 

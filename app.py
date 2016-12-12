@@ -83,7 +83,7 @@ def incoming_data():
 
         if pin in currently_tracking.keys(): # yay! you're tracking what just came across!
             if currently_tracking[pin] == "temperature":
-                voltage = float(request.form[pin]) * 0.004882814
+                voltage = float(request.form[pin] - 58) * 0.004882814
                 degreesC = (voltage - 0.5) * 100.0
                 degreesF = degreesC * (9.0/5.0) + 32.0
                 data['temp_data']['values'] += [degreesF]

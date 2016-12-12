@@ -1,183 +1,191 @@
 // // Needs to belong in the templates folder because we're loading it as a template
 // //  to use Jinja syntax. A little gross.
 
-$(function() { 
 
-  // get the data and temporarily dump it
+// get the data and temporarily dump it
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+$(function() {
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  $.getJSON($SCRIPT_ROOT+"/get_data",
+    function(bracelet_data) {
+      $("#data").text(JSON.stringify(bracelet_data));
 
-    $(function() {
-        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-        $.getJSON($SCRIPT_ROOT+"/get_data",
-            function(data) {
-               
-                $("#data").text(JSON.stringify(data));
+      google.charts.load('current', {'packages':['corechart', 'timeline', 'scatter']});
 
-                
-           });
+      google.charts.setOnLoadCallback(drawLineChart);
+      google.charts.setOnLoadCallback(drawTimelineChart);
+      google.charts.setOnLoadCallback(drawScatterChart);
+      google.charts.setOnLoadCallback(drawMoodsChart);
+
+      function drawLineChart() {
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('timeofday', 'Time');
+        data.addColumn('number', 'Light');
+        data.addColumn('number', 'Temperature');
+        data.addColumn('number', 'Noise');
+
+        console.log(bracelet_data);
+
+        var data_rows = []
+        for (var n = 0; n <= 10; n++) { 
+          var inner_row = []
+
+          var reg = /..:..:../g;
+
+          if (bracelet_data["light_data"]["timestamps"].length > 0) {
+
+            var time_str = reg.exec(bracelet_data["light_data"]["timestamps"][n]);
+            time = time_str.split(":");
+            for (var i = 0; i < time.length; i ++) { 
+              time[i] = parseInt(time[i]);
+            }
+
+            inner_row.push(time);
+
+            inner_row.push(bracelet_data["light_data"]["values"][n]);
+            inner_row.push(bracelet_data["temp_data"]["values"][n]);
+            inner_row.push(bracelet_data["sound_data"]["values"][n]);
+
+            data_rows.push(inner_row);
+
+          }
+
+        }
+
+        data.addRows(data_rows);
+
+        console.log(data_rows); 
+
+        var options = {
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          colors:['#9999ff','#ffb366','#94b8b8'],
+          vAxis: {
+            baselineColor: 'none',
+            ticks: []
+          }
+        };
+
+        var lineChart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
+
+        function resizeChart () {
+          lineChart.draw(data, options);
+        }
+        if (document.addEventListener) {
+            window.addEventListener('resize', resizeChart);
+        }
+        else if (document.attachEvent) {
+            window.attachEvent('onresize', resizeChart);
+        }
+        else {
+            window.resize = resizeChart;
+        }
+
+        lineChart.draw(data, options);
+      } // close line chart
+
+      function drawMoodsChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Mood', 'Number of Times Recorded'],
+          ['Happy', 11],
+          ['Sad',  1],
+          ['Anxious',  2],
+          ['Angry', 2],
+          ['Frustrated', 7]
+        ]);
+
+        var options = {
+          title: 'Your Daily Mood',
+          pieHole: 0.1,
+          height: 175
+        };
+
+        var moodChart = new google.visualization.PieChart(document.getElementById('mood_chart_div'));
+
+        function resizeChart () {
+          moodChart.draw(data, options);
+        }
+        if (document.addEventListener) {
+            window.addEventListener('resize', resizeChart);
+        }
+        else if (document.attachEvent) {
+            window.attachEvent('onresize', resizeChart);
+        }
+        else {
+            window.resize = resizeChart;
+        }
+
+        moodChart.draw(data, options);
+      } // close mood
+
+
+      function drawScatterChart () {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Day');
+        data.addColumn('timeofday', 'Water');
+        data.addColumn('timeofday', 'Food');
+
+        data.addRows([
+              [1, [9, 0, 0], [8, 30, 45]],  [1, [9, 0, 0], [10, 0, 0, 0]],   [2, [10, 0, 0, 0], [13, 45, 0]],
+              [3, [12, 59, 0], [10, 45, 0, 0]]
+        ]);
+
+        var options = {
+          width: 320,
+          height: 500,
+          hAxis: {title: 'Day'},
+          vAxis: {title: 'Time'}
+        };
+
+        var chart = new google.charts.Scatter(document.getElementById('scatter_chart_div'));
+
+        function resizeChart () {
+          chart.draw(data, options);
+        }
+        if (document.addEventListener) {
+            window.addEventListener('resize', resizeChart);
+        }
+        else if (document.attachEvent) {
+            window.attachEvent('onresize', resizeChart);
+        }
+        else {
+            window.resize = resizeChart;
+        }
+
+        chart.draw(data, google.charts.Scatter.convertOptions(options));
+      }
+
+      function drawTimelineChart() {
+        var container = document.getElementById('timeline_chart_div');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+
+        dataTable.addColumn({ type: 'string', id: 'Day' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+        dataTable.addRows([
+          [ 'Day 1', new Date(0,0,0,22,0,0),  new Date(0,0,1,6,30,0)],
+          [ 'Day 2', new Date(0,0,0,22,47,0),  new Date(0,0,1,7,0,0)],
+          [ 'Day 3', new Date(0,0,0,21,55,0), new Date(0,0,1,5,53,0) ]]);
+
+        function resizeChart () {
+          chart.draw(data);
+        }
+        if (document.addEventListener) {
+            window.addEventListener('resize', resizeChart);
+        }
+        else if (document.attachEvent) {
+            window.attachEvent('onresize', resizeChart);
+        }
+        else {
+            window.resize = resizeChart;
+        }
+
+        chart.draw(dataTable);
+      }
     });
-
-  google.charts.load('current', {'packages':['corechart','calendar', 'timeline', 'scatter']});
-
-  google.charts.setOnLoadCallback(drawCalendarChart);
-  google.charts.setOnLoadCallback(drawLineChart);
-  google.charts.setOnLoadCallback(drawMoodChart);
-  google.charts.setOnLoadCallback(drawFoodChart);
-  
-
-  function drawLineChart() {
-
-    var data1 = document.getElementById("data").innerHTML;
-    var data_output = JSON.parse(String(data1));
-
-    console.log(data_output.values.light_data);
-    console.log(data_output.values.temp_data);
-
-    var data = google.visualization.arrayToDataTable([
-      ['Time', 'Light', 'Temperature', 'Noise'],
-      ['Su',    08,      40,      40],
-      ['M',   50,      90,      50],
-      ['T',  50,      90,      30],
-      ['W',  60,       70,      40],
-      ['Th',  63,      60,      50],
-      ['F',  90,      70,      60],
-      ['Sa',  100,      30,      40]
-    ]);
-
-    console.log(data);
-
-    var options = {
-      title: 'Mood and Diet',
-      curveType: 'function',
-      legend: { position: 'bottom' },
-      colors:['#9999ff','#ffb366','#94b8b8']
-    };
-
-    var lineChart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
-
-    function resizeChart () {
-      lineChart.draw(data, options);
-    }
-    if (document.addEventListener) {
-        window.addEventListener('resize', resizeChart);
-    }
-    else if (document.attachEvent) {
-        window.attachEvent('onresize', resizeChart);
-    }
-    else {
-        window.resize = resizeChart;
-    }
-
-    lineChart.draw(data, options);
-  } // close line chart
-
-  function drawCalendarChart() {
-    var dataTable = new google.visualization.DataTable();
-    dataTable.addColumn({ type: 'date', id: 'Date' });
-    dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
-
-    //september cal
-    for (i = 0; i < 31; i++) { 
-      var random_int = Math.floor(Math.random() * 9);
-      dataTable.addRows([[new Date(2016, 8, i+1), random_int]]);
-    };
-
-    //october cal
-    for (i = 0; i < 31; i++) { 
-      var random_int = Math.floor(Math.random() * 9);
-      dataTable.addRows([[new Date(2016, 9, i+1), random_int]]);
-    };
-
-    //november cal
-    for (i = 0; i < 30; i++) { 
-      var random_int = Math.floor(Math.random() * 9);
-      dataTable.addRows([[new Date(2016, 10, i+1), random_int]]);
-    };
-
-    var calendarChart = new google.visualization.Calendar(document.getElementById('calendar_chart_div'));
-
-    var options = {
-      title: "Your Bracelet Use"
-    };
-
-    function resizeChart () {
-      calendarChart.draw(dataTable, options);
-    }
-    if (document.addEventListener) {
-        window.addEventListener('resize', resizeChart);
-    }
-    else if (document.attachEvent) {
-        window.attachEvent('onresize', resizeChart);
-    }
-    else {
-        window.resize = resizeChart;
-    }
-
-      calendarChart.draw(dataTable, options);
-    } // close draw calendar
-
-  function drawMoodChart() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Mood', 'Number of Times Recorded'],
-      ['Happy', 11],
-      ['Sad',  2],
-      ['Anxious',  2],
-      ['Angry', 2],
-      ['Frustrated', 7]
-    ]);
-
-    var options = {
-      title: 'Your Daily Mood',
-      pieHole: 0.4,
-    };
-
-    var moodChart = new google.visualization.PieChart(document.getElementById('mood_chart_div'));
-    moodChart.draw(data, options);
-
-  } // close mood
-
-  function drawFoodChart () {
-
-    var data = new google.visualization.DataTable();
-    data.addColumn('number', 'Hours Studied');
-    data.addColumn('number', 'Final');
-
-    data.addRows([
-      [0, 67], [1, 88], [2, 77],
-      [3, 93], [4, 85], [5, 91],
-      [6, 71], [7, 78], [8, 93],
-      [9, 80], [10, 82],[0, 75],
-      [5, 80], [3, 90], [1, 72],
-      [5, 75], [6, 68], [7, 98],
-      [3, 82], [9, 94], [2, 79],
-      [2, 95], [2, 86], [3, 67],
-      [4, 60], [2, 80], [6, 92],
-      [2, 81], [8, 79], [9, 83],
-      [3, 75], [1, 80], [3, 71],
-      [3, 89], [4, 92], [5, 85],
-      [6, 92], [7, 78], [6, 95],
-      [3, 81], [0, 64], [4, 85],
-      [2, 83], [3, 96], [4, 77],
-      [5, 89], [4, 89], [7, 84],
-      [4, 92], [9, 98]
-    ]);
-
-    var options = {
-      width: 800,
-      height: 500,
-      chart: {
-        title: 'Students\' Final Grades',
-        subtitle: 'based on hours studied'
-      },
-      hAxis: {title: 'Hours Studied'},
-      vAxis: {title: 'Grade'}
-    };
-
-    var chart = new google.charts.Scatter(document.getElementById('food_chart_div'));
-
-    chart.draw(data, google.charts.Scatter.convertOptions(options));
-  }
-
-
 });
