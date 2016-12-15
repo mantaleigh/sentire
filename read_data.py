@@ -1,5 +1,5 @@
 import serial, requests
-ser = serial.Serial('/dev/cu.usbmodem1411', 9600)
+ser = serial.Serial('/dev/cu.usbmodem1421', 9600)
 
 host = 'http://127.0.0.1:5000'
 

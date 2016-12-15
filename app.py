@@ -34,7 +34,7 @@ data = {
         "timestamps": []
     },
     "moods_data": { 
-        "happy": {  # example
+        "happy": {  # example mood, these can be totally customized
             "value": 0,
             "timestamps": []
         }
@@ -52,10 +52,14 @@ data = {
 
 currently_tracking = {} 
 
+
+# Home page, dump out the current data in the data dict
 @app.route('/', methods=["GET", "POST"])
 def home():
     global currently_tracking
 
+
+    # handle posted data from the customization form
     if request.method == "POST": 
         for k in request.form.keys(): 
             if request.form[k] != "Choose Input Type":
@@ -65,20 +69,21 @@ def home():
                 elif 'mood_desc' not in k:
                     currently_tracking[k] = request.form[k].encode('ascii')
 
-    print currently_tracking # for testing
     return render_template("index.html")
 
+# endpoint entirely to return all current tracked data
 @app.route('/get_data', methods=["GET"])
 def get_data():
     global data
     return jsonify(values=data)
 
+# endpoint that handles interpreting the data coming in from read_data and only 
+# adds info to the data dict only if the data coming across matches what's in the currently tracking dict
 @app.route('/incoming_data', methods=['GET', 'POST'])
 def incoming_data():
 
-    global data # lol gross
+    global data
     if request.method == 'POST':
-
         pin = request.form.keys()[0] # only one line comes across at a time
 
         if pin in currently_tracking.keys(): # yay! you're tracking what just came across!
@@ -120,9 +125,4 @@ def incoming_data():
 
 if __name__ == '__main__':
     app.debug = True
-    # port = os.getuid()
-    # # Flask will print the port anyhow, but let's do so too
-    # print('Running on port '+str(port))
-    # app.run('0.0.0.0',port)
-
     app.run()

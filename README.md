@@ -11,7 +11,26 @@ The intended user groups are busy people wanting to keep track of their mood, da
 
 This project includes a Flask web app, Arduino code that formats the output from the bracelet into what the app's endpoints can handle, and a python script that reads sensor data from a serial port and posts it to one of the Flask's endpoints.
 
+### How are the customizations handled?
+
+There are 2 sections on the bracelet: 
+* Active inputs -- buttons
+* Passive inputs -- sensors
+
+The active inputs are named d_1 through d_4, with d stanading for digital (these bead spaces are plugged into digital pins on the Arduino).
+
+The passive inputs are named a_1 through a_3, with a standing for analog (these bead spaces are plugged into analog pins on the Arduino).
+
+The customization form puts it on the user to associate the spaces on the bracelet with what beads they have put there (i.e. a_3 might be a temperature sensor). The endpoint that handles inserting the data coming in from the Arduino then uses the currently_tracking dictionary, based on the customization form, to only save data that is currently being tracked.
+
+This way, the user gets maximum customizability. They can remove beads or put them in any order (as long as they stay in the right section) and only have to worry about updating the fields in the customization form. The code handles the rest of the associating.
+
 ## How to run
+
+### Dependencies 
+
+* Python 2.7
+* Flask 0.10.X
 
 ### To run just the web app: 
 

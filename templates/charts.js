@@ -1,10 +1,13 @@
-// // Needs to belong in the templates folder because we're loading it as a template
-// //  to use Jinja syntax. A little gross.
+// charts.js
+// --- Render the charts on the #graphs page
 
 
-// get the data and temporarily dump it
+// Needs to belong in the templates folder because we're loading it as a template
+//  to use Jinja syntax. A little gross.
+
 $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
+// get the data using the /get_data endpoint, use the callback to render the graphs
 $(function() {
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
   $.getJSON($SCRIPT_ROOT+"/get_data",
@@ -25,38 +28,43 @@ $(function() {
         data.addColumn('number', 'Light');
         data.addColumn('number', 'Temperature');
         data.addColumn('number', 'Noise');
+        data.addRows([
+              [[9, 0, 0], 130 , 72, 100],  
+              [[10, 0, 0], 134 , 73, 112],   
+              [[11, 0, 0], 111 , 71, 130],
+              [[12, 0, 0], 103 , 71, 158]
+        ]);
 
-        console.log(bracelet_data);
+        // The following commented out code is close to what it would take to 
+        // get the sensor info in data into the line graph appropriately.
+        // ... There's a minor bug or two
 
-        var data_rows = []
-        for (var n = 0; n <= 10; n++) { 
-          var inner_row = []
+        // var data_rows = []
+        // for (var n = 0; n <= 10; n++) { 
+        //   var inner_row = []
 
-          var reg = /..:..:../g;
+        //   var reg = /..:..:../g;
 
-          if (bracelet_data["light_data"]["timestamps"].length > 0) {
+        //   if (bracelet_data["light_data"]["timestamps"].length > 0) {
 
-            var time_str = reg.exec(bracelet_data["light_data"]["timestamps"][n]);
-            time = time_str.split(":");
-            for (var i = 0; i < time.length; i ++) { 
-              time[i] = parseInt(time[i]);
-            }
+        //     var time_str = reg.exec(bracelet_data["light_data"]["timestamps"][n]);
+        //     time = time_str.split(":");
+        //     for (var i = 0; i < time.length; i ++) { 
+        //       time[i] = parseInt(time[i]);
+        //     }
 
-            inner_row.push(time);
+        //     inner_row.push(time);
 
-            inner_row.push(bracelet_data["light_data"]["values"][n]);
-            inner_row.push(bracelet_data["temp_data"]["values"][n]);
-            inner_row.push(bracelet_data["sound_data"]["values"][n]);
+        //     inner_row.push(bracelet_data["light_data"]["values"][n]);
+        //     inner_row.push(bracelet_data["temp_data"]["values"][n]);
+        //     inner_row.push(bracelet_data["sound_data"]["values"][n]);
 
-            data_rows.push(inner_row);
+        //     data_rows.push(inner_row);
 
-          }
+        //   }
 
-        }
-
-        data.addRows(data_rows);
-
-        console.log(data_rows); 
+        // }
+        // data.addRows(data_rows);
 
         var options = {
           curveType: 'function',
